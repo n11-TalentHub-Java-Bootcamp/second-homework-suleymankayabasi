@@ -3,6 +3,9 @@ package com.suleymankayabasi.springboot.controller;
 import com.suleymankayabasi.springboot.converter.ProductReviewConverter;
 import com.suleymankayabasi.springboot.dto.ProductReviewDto;
 import com.suleymankayabasi.springboot.entity.ProductReview;
+import com.suleymankayabasi.springboot.exception.ProductNotFoundException;
+import com.suleymankayabasi.springboot.exception.ProductReviewNotFoundException;
+import com.suleymankayabasi.springboot.exception.UserNotFoundException;
 import com.suleymankayabasi.springboot.service.entityService.ProductReviewEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,6 @@ public class ProductReviewController {
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Long id){
         productReviewEntityService.deleteById(id);
-
     }
 
     //A service that can comment a new it.
@@ -47,15 +49,17 @@ public class ProductReviewController {
     //A service that returns all reviews for a product.
     @GetMapping("product/{id}")
     public List<ProductReviewDto> findProductReviewsByProductId(@PathVariable Long id){
+
         List<ProductReview> productReviewList = productReviewEntityService.findProductReviewsByProductId(id);
 
         List<ProductReviewDto> productReviewDtoList = ProductReviewConverter
                 .INSTANCE.convertProductReviewListToProductReviewDtoList(productReviewList);
 
-        //TODO: “XXX ürüne henüz bir yorum yazılmamıştır”
-
+        if(productReviewList.size() == 0){
+            throw new ProductReviewNotFoundException
+                    ("Ürün id: numarası "+ id +"olan ürüne henüz bir yorum yazılmamıştır.");
+        }
         return productReviewDtoList;
-
     }
 
     //A service that returns comments made by a user.
@@ -63,10 +67,13 @@ public class ProductReviewController {
     public List<ProductReviewDto> findProductReviewsByUser_Id(@PathVariable Long id){
         List<ProductReview> productReviewList = productReviewEntityService.findProductReviewsByUser_Id(id);
 
+        if(productReviewList.size() == 0 ){
+            throw new ProductReviewNotFoundException
+                    ("Kullanıcı id: numarası "+id+" olan kullanıcı henüz bir yorum yazmamıştır.");
+        }
+
         List<ProductReviewDto> productReviewDtoList = ProductReviewConverter
                 .INSTANCE.convertProductReviewListToProductReviewDtoList(productReviewList);
-
-        //TODO:“XXX kullanıcı henüz bir yorum yazmamıştır” HATA FIRLATMALI
 
         return productReviewDtoList;
     }

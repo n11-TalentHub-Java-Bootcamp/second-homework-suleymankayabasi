@@ -135,45 +135,4 @@ public class ProductController {
         return SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "price", "registrationDate");
     }
 
-    /*@GetMapping("/{id}")
-    public EntityModel<Product> findProductById(@PathVariable Long id){
-        Product product = productEntityService.findById(id);
-
-        if(product == null){
-            throw new ProductNotFoundException("Product not found. ID: "+ id);
-        }
-
-        WebMvcLinkBuilder linkToProduct = WebMvcLinkBuilder.
-                linkTo(WebMvcLinkBuilder.
-                        methodOn(this.getClass()).findAllProductList());
-
-        EntityModel entityModel = EntityModel.of(product);
-        entityModel.add(linkToProduct.withRel("All Products"));
-
-        return entityModel;
-    }*/
-
-    /*
-    private Product convertProductDtoToProduct(ProductDto productDto){
-        Category category = categoryEntityService.findById(productDto.getCategoryId());
-
-        Product product = new Product();
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
-        product.setRegistrationDate(productDto.getDate());
-        product.setCategory(category);
-
-        return product;
-    }
-
-    private ProductDetailDto convertProductToProductDetailDto(Product product){
-        Category category = categoryEntityService.findById(product.getCategory().getId());
-
-        ProductDetailDto productDetailDto = new ProductDetailDto();
-        productDetailDto.setProductName(product.getName());
-        productDetailDto.setProductPrice(product.getPrice());
-        productDetailDto.setCategoryName(category.getName());
-        return productDetailDto;
-    }
-    */
 }

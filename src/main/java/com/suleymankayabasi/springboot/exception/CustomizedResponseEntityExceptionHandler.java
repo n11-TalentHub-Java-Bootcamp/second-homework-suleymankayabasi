@@ -41,4 +41,32 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllExceptions
+            (UserNotFoundException userNotFoundException, WebRequest webRequest){
+
+        Date errorDate = new Date();
+        String message = userNotFoundException.getMessage();
+        String description = webRequest.getDescription(false);
+
+        ExceptionResponse exceptionResponse =  new ExceptionResponse
+                (errorDate,message,description);
+
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleAllExceptions
+            (ProductReviewNotFoundException productReviewNotFoundException, WebRequest webRequest){
+
+        Date errorDate = new Date();
+        String message = productReviewNotFoundException.getMessage();
+        String description = webRequest.getDescription(false);
+
+        ExceptionResponse exceptionResponse =  new ExceptionResponse
+                (errorDate,message,description);
+
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
 }

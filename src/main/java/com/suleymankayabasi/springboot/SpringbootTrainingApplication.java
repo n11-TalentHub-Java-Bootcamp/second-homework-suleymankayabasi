@@ -20,7 +20,6 @@ public class  SpringbootTrainingApplication {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringbootTrainingApplication.class, args);
-
         CategoryEntityService categoryEntityService = applicationContext.getBean(CategoryEntityService.class);
         ProductEntityService productEntityService = applicationContext.getBean(ProductEntityService.class);
 

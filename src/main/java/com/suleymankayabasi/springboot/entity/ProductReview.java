@@ -29,9 +29,9 @@ public class ProductReview {
     private Product product;
 
     // A User can write a lot of Product Reviews
-    // TODO USER SİLİNCE YORUMUDA SİLİNMELİ
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USERS",foreignKey = @ForeignKey(name = "FK_PRODUCT_REVIEW_USER_ID"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     public Long getId() {

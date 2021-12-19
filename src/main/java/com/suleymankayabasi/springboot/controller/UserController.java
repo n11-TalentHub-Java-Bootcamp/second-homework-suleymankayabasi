@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.suleymankayabasi.springboot.converter.UserConverter;
 import com.suleymankayabasi.springboot.dto.UserDto;
 import com.suleymankayabasi.springboot.entity.User;
+import com.suleymankayabasi.springboot.exception.UserNotFoundException;
 import com.suleymankayabasi.springboot.service.entityService.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,12 +37,17 @@ public class UserController {
     @DeleteMapping("{userName}/{phoneNumber}")
     public void deleteUserByUserNameAndByPhoneNumber(@PathVariable String userName,@PathVariable String phoneNumber){
         User user = userEntityService.findUserByUserName(userName);
-        User user1 = userEntityService.findUserByPhoneNumber(phoneNumber);
 
-        if(user.getId() == user1.getId()){
-            userEntityService.deleteById(user.getId());
-        } else{
-            //TODO:“XXX kullanıcı adı ile YYY telefonu bilgileri uyuşmamaktadır.”
+        if(user != null){
+            if( user.getPhoneNumber().equals(phoneNumber)){
+                userEntityService.deleteById(user.getId());
+            } else{
+                throw new UserNotFoundException(user.getUserName()+" kullanıcı adı ile "
+                        +phoneNumber+" telefonu bilgileri uyuşmamaktadır.");
+            }
+        }
+        else{
+            throw new UserNotFoundException("Sistemde "+userName+" isimli kayıtlı bir kullanıcı bulunamadı.");
         }
     }
 

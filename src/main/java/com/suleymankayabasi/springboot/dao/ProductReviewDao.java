@@ -13,5 +13,6 @@ public interface ProductReviewDao extends JpaRepository<ProductReview,Long> {
 
     List<ProductReview> findProductReviewsByProductId(Long id);
 
+
 }
 

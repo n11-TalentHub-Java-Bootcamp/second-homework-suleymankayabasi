@@ -1,5 +1,4 @@
 package com.suleymankayabasi.springboot.entity;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 

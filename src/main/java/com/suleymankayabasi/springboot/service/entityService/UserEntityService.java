@@ -18,10 +18,6 @@ public class UserEntityService {
         return userDao.findAll();
     }
 
-    public User findById(Long id){
-        return userDao.findUserById(id);
-    }
-
     public User findUserByUserName(String userName){
         return userDao.findUserByUserName(userName);
     }

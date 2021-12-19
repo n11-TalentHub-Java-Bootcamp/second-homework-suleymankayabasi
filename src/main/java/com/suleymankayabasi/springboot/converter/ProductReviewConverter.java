@@ -1,8 +1,6 @@
 package com.suleymankayabasi.springboot.converter;
 
-import com.suleymankayabasi.springboot.dto.ProductDetailDto;
 import com.suleymankayabasi.springboot.dto.ProductReviewDto;
-import com.suleymankayabasi.springboot.entity.Product;
 import com.suleymankayabasi.springboot.entity.ProductReview;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
