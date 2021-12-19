@@ -24,4 +24,6 @@ The DELETE method deletes the specified resource.
 ## Exception Handling in Java
 The Exception Handling in Java is one of the powerful mechanism to handle the runtime errors so that the normal flow of the application can be maintained.
 
+![java-exceptions-hierarchy-example](https://user-images.githubusercontent.com/82765835/146689536-575f41f9-b514-44ad-b2b0-dcad031da834.png)
+
 
