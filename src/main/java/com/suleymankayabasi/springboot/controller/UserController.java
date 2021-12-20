@@ -34,7 +34,7 @@ public class UserController {
     }
 
     //A service that can delete a user.
-    @DeleteMapping("{userName}/{phoneNumber}")
+    @DeleteMapping("user/{userName}/phonenumber/{phoneNumber}")
     public void deleteUserByUserNameAndByPhoneNumber(@PathVariable String userName,@PathVariable String phoneNumber){
         User user = userEntityService.findUserByUserName(userName);
 
@@ -84,7 +84,7 @@ public class UserController {
     }
 
     //A service that retrieves the User with username.
-    @GetMapping("userName/{userName}")
+    @GetMapping("username/{userName}")
     public MappingJacksonValue findUserByUserName(@PathVariable String userName){
 
         User user = userEntityService.findUserByUserName(userName);
